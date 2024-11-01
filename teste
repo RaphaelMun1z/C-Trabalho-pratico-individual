@@ -1,0 +1,53 @@
+#include <stdio.h>
+
+int main()
+{
+    srand(time(NULL));
+    
+    for(int ii = 0; ii < 4; ii++){
+        printf("|       |  ");
+    }
+    
+    printf("\n");
+    
+    for(int ii = 0; ii < 4; ii++){
+        printf("---------  ");
+    }
+    
+    printf("\n");
+    
+    for(int ii = 0; ii < 4; ii++){
+        printf("---------  ");
+    }
+    
+    printf("\n");
+    
+    for(int jj = 0; jj < 3; jj++){
+        for(int ii = 0; ii < 4; ii++){
+            if(jj == 1){
+                printf("|   %c   |  ", ((rand() % 26)+65));
+            }else{
+                printf("|       |  ");
+            }
+        }
+        printf("\n");
+    }
+    
+    for(int ii = 0; ii < 4; ii++){
+        printf("---------  ");
+    }
+    
+    printf("\n");
+    
+    for(int ii = 0; ii < 4; ii++){
+        printf("---------  ");
+    }
+    
+    printf("\n");
+    
+    for(int ii = 0; ii < 4; ii++){
+        printf("|       |  ");
+    }
+    
+    return 0;
+}
