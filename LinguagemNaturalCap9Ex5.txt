@@ -1,0 +1,5 @@
+Cap9Ex5
+
+Informe uma frase
+Para cada letra dessa frase, verificar se é uma vogal
+Se é uma vogal, trocar a letra por '*'

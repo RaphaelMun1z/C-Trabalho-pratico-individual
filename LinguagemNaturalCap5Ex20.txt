@@ -1,0 +1,15 @@
+Cap5Ex20
+
+Peça o código
+Peça o sexo
+Peça o número de horas/aulas
+Calcule o salário bruto - multiplique o número de horas/aulas por 30
+Se for Homem, o desconto sobre o salário bruto é de 10%
+Se for Mulher, o desconto sobre o salário bruto é de 5%
+Calcule o salário líquido - subtraia do salário bruto o equivalente ao desconto
+Mostre o código
+Mostre o salário bruto
+Mostre o salário líquido
+Peça o código e repita o processo até quando desejar
+Se foi análisado o dado de algum professor do sexo masculino, verificar a média masculina
+Se foi análisado o dado de algum professor do sexo feminino, verificar a média feminina

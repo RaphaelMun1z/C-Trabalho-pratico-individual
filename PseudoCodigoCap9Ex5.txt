@@ -1,0 +1,27 @@
+Algoritmo Cap9Ex5
+
+DECLARE
+    frase CADEIA
+    length NUMÉRICO
+
+INICIO_FUNÇÃO ehVogal (CARACTER char)
+    SE char = 'A' ou char = 'E' ou char = 'I' ou char = 'O' ou char = 'U' ENTÃO
+        Retorna verdadeiro
+    FIM_SE
+    Retorna falso
+FIM_FUNÇÃO
+
+INICIO
+    Escreva "Informe a frase:"
+    Leia frase
+
+    length <- tamanho(frase)
+
+    PARA ii <- 0 ATÉ ii < length FAÇA [PASSO 1] INICIO
+        SE ehVogal(frase[ii]) ENTÃO
+            frase[ii] <- '*'
+        FIM_SE
+    FIM_PARA
+
+    Escreva "Frase: ", frase
+FIM

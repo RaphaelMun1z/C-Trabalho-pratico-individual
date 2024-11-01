@@ -1,0 +1,6 @@
+Cap7Ex7
+
+Crie uma matriz de 5 linhas e 7 colunas
+Verifique o menor elemento da primeira linha, e guarde a posição desse valor
+Verifique o maior elemento da coluna - mesma coluna do valor analisado anteriormente - e guarde a posição desse valor
+Se as posições são iguais, há um ponto de sela

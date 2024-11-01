@@ -1,0 +1,156 @@
+Algoritmo Cap6Ex9
+
+DECLARE
+    voo[12], lugares[12], op, num_voo NUMÉRICO
+    origem[12][50], destino[12][50], local[50] CARACTER
+
+INÍCIO_FUNÇÃO defineDados()
+    PARA ii <- 0 ATÉ ii < 12 [PASSO 1] INÍCIO
+        Escreva "========================| ", (ii + 1), "° |========================"
+        Escreva "Código: "
+        Leia voo[ii]
+
+        Escreva "Origem: "
+        Leia origem[ii]
+
+        Escreva "Destino: "
+        Leia destino[ii]
+
+        Escreva "Número de lugares disponíveis: "
+        Leia lugares[ii]
+    FIM_PARA
+FIM_FUNÇÃO
+
+INÍCIO_FUNÇÃO mostraMenuPrincipal()
+        Escreva "========================| Menu |========================"
+        Escreva "[1] Consultar"
+        Escreva "[2] Efetuar reserva"
+        Escreva "[3] Sair"
+        Escreva "----------------------------------------------------------"
+FIM_FUNÇÃO
+
+INÍCIO_FUNÇÃO mostraMenuConsultar()
+    Escreva "===================| Menu Consultar |==================="
+    Escreva "[1] Consulta por voo"
+    Escreva "[2] Consulta por origem"
+    Escreva "[3] Consulta por destino"
+    Escreva "----------------------------------------------------------"
+FIM_FUNÇÃO
+
+INÍCIO_FUNÇÃO dadosVoo(int indice)
+    Escreva "-- Número do voo: ", voo[indice]
+    Escreva "-- Local de origem: ", origem[indice]
+    Escreva "-- Local de destino: ", destino[indice]
+    Escreva "-- Lugares disponíveis: ", lugares[indice]
+FIM_FUNÇÃO
+
+INÍCIO_FUNÇÃO consultaPorVoo(int num_voo)
+    PARA ii <- 0 ATÉ ii < 12 [PASSO 1] INÍCIO
+        SE num_voo = voo[ii] INÍCIO
+            dadosVoo(ii)
+            RETORNA
+        FIM_SE
+    FIM_PARA
+    Escreva "-- Voo inexistente!"
+FIM_FUNÇÃO
+
+INÍCIO_FUNÇÃO consultaPorOrigem(char origem_voo[50])
+    PARA ii <- 0 ATÉ ii < 12 [PASSO 1] INÍCIO
+        SE origem_voo = origem[ii] INÍCIO
+            dadosVoo(ii)
+            RETORNA
+        FIM_SE
+    FIM_PARA
+
+    Escreva "-- Origem não encontrada!"
+FIM_FUNÇÃO
+
+INÍCIO_FUNÇÃO consultaPorDestino(char destino_voo[50])
+    PARA ii <- 0 ATÉ ii < 12 [PASSO 1] INÍCIO
+        SE destino_voo = destino[ii] INÍCIO
+            dadosVoo(ii)
+            RETORNA
+        FIM_SE
+    FIM_PARA
+
+    Escreva "-- Destino não encontrado!"
+FIM_FUNÇÃO
+
+INÍCIO_FUNÇÃO indiceVoo(int num_voo)
+    PARA ii <- 0 ATÉ ii < 12 [PASSO 1] INÍCIO
+        SE num_voo = voo[ii] INÍCIO
+            RETORNA ii
+        FIM_SE
+    FIM_PARA
+
+    RETORNA -1
+FIM_FUNÇÃO
+
+INÍCIO_FUNÇÃO haVaga(int indice)
+    SE lugares[indice] > 0
+        RETORNA 1
+    SENÃO
+        RETORNA 0
+    FIM_SE
+FIM_FUNÇÃO
+
+INÍCIO
+    defineDados()
+
+    FAÇA
+        mostraMenuPrincipal()
+        Escreva "Digite sua opção: "
+        Leia op
+
+        ESCOLHA (op)
+            CASO 1:
+                mostraMenuConsultar()
+                Escreva "Digite sua opção: "
+                Leia op
+
+                ESCOLHA (op)
+                    CASO 1:
+                        Escreva "Digite o número de voo: "
+                        Leia num_voo
+
+                        consultaPorVoo(num_voo)
+
+                    CASO 2:
+                        Escreva "Digite a origem: "
+                        Leia local
+
+                        consultaPorOrigem(local)
+
+                    CASO 3:
+                        Escreva "Digite o destino: "
+                        Leia local
+
+                        consultaPorDestino(local)
+                FIM_ESCOLHA
+
+                op <- -1
+
+            CASO 2:
+                Escreva "Digite o número do voo desejado: "
+                Leia num_voo
+
+                SE indiceVoo(num_voo) != -1 ENTÃO
+                    SE haVaga(indiceVoo(num_voo))
+                        lugares[indiceVoo(num_voo)] <- lugares[indiceVoo(num_voo)] - 1
+                        Escreva "-- Reserva confirmada!"
+                    SENÃO
+                        Escreva "-- Voo lotado!"
+                    FIM_SE
+                SENÃO
+                    Escreva "-- Voo inexistente!"
+                FIM_SE
+
+            CASO 3:
+                Escreva "Saindo..."
+
+            OUTRO CASO:
+                Escreva "Opção inválida!"
+
+        FIM_ESCOLHA
+    ENQUANTO op != 3
+FIM

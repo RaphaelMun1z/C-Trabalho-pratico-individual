@@ -1,0 +1,56 @@
+Algoritmo Cap5Ex20
+
+DECLARE
+    cod <- 0, num_h <- 0, cont_m <- 0, cont_f <- 0, sal_b <- 0, sal_l <- 0, media_m <- 0, media_f <- 0 NUMÉRICO
+    sexo CARACTER
+INÍCIO
+    Escreva "Informe o código: "
+    Leia cod
+
+    ENQUANTO cod != 99999 INÍCIO
+        FAÇA
+            Escreva "Informe o sexo (M — masculino; F — feminino): "
+            Leia sexo
+
+            SE sexo != 'M' e sexo != 'F' ENTÃO
+                Escreva "Sexo inválido!"
+            FIM_SE
+        ENQUANTO sexo != 'M' E sexo != 'F'
+
+        Escreva "Informe o número de horas/aulas: "
+        Leia num_h
+
+        sal_b <- num_h * 30
+
+        SE sexo = 'M' ENTÃO
+            sal_l <- sal_b - (sal_b * 0.1)
+            media_m <- media_m + sal_l
+            cont_m <- cont_m + 1
+        SENÃO SE sexo = 'F' ENTÃO
+            sal_l <- sal_b - (sal_b * 0.05)
+            media_f <- media_f + sal_l
+            cont_f <- cont_f + 1
+        FIM_SE
+
+        Escreva "Código: ", cod
+        Escreva "Salário Bruto: R$", sal_b
+        Escreva "Salário Líquido: R$", sal_l
+
+        Escreva "Informe o código: "
+        Leia cod
+    FIM_ENQUANTO
+
+    SE cont_m = 0 ENTÃO
+        Escreva "Nenhum professor do sexo masculino"
+    SENÃO
+        media_m <- media_m / cont_m;
+        Escreva "Média masculino: R$", media_m
+    FIM_SE
+
+    SE cont_f = 0 ENTÃO
+        Escreva "Nenhum professor do sexo feminino"
+    SENÃO
+        media_f <- media_f / cont_f;
+        Escreva "Média feminino: R$", media_f
+    FIM_SE
+FIM

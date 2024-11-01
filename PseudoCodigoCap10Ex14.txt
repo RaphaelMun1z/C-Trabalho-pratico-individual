@@ -1,0 +1,263 @@
+Algoritmo Cap10Ex14
+
+DECLARE
+    barcos[6] BARCO
+    regatas[3] REGATA
+    participantes[3][4] BARCOREGATA
+    numero, data, dia, mes, ano, inicio, chegada, numRegata NUMÉRICO
+
+INÍCIO_REGISTRO regata
+    numero NUMÉRICO
+    data[11] CADEIA
+    horaInicio NUMÉRICO
+    codBarcoVencedor NUMÉRICO
+FIM_REGISTRO
+
+INÍCIO_REGISTRO barco
+    numero NUMÉRICO
+    nome[50] CADEIA
+    anoFabricacao NUMÉRICO
+FIM_REGISTRO
+
+INÍCIO_REGISTRO barcoRegata
+    numeroBarco NUMÉRICO
+    numeroRegata NUMÉRICO
+    horaChegada NUMÉRICO
+FIM_REGISTRO
+
+INÍCIO_FUNÇÃO existeBarcoComNumero(NUMÉRICO numero)
+    PARA ii <- 0 ATÉ ii < 6 [PASSO 1] INÍCIO
+        SE barcos[ii].numero = numero ENTÃO
+            retorne verdadeiro
+        FIM_SE
+    FIM_PARA
+
+    retorne falso
+FIM_FUNÇÃO
+
+INÍCIO_FUNÇÃO cadastrarBarcos()
+    Escreva "============| Cadastrar Barcos |============"
+    PARA ii <- 0 ATÉ ii < 6 [PASSO 1] INÍCIO
+        FAÇA
+            Escreva "Número do barco: "
+            Leia numero
+
+            SE existeBarcoComNumero(numero) ENTÃO
+                Escreva "-- Já existe um barco com este número!"
+            FIM_SE
+        ENQUANTO existeBarcoComNumero(numero)
+
+        barcos[ii].numero = numero
+
+        Escreva "Nome do barco: "
+        Leia barcos[ii].nome
+
+        Escreva "Ano de Fabricação: "
+        Leia barcos[ii].anoFabricacao
+
+        Escreva "____________________________________________________"
+    FIM_PARA
+FIM_FUNÇÃO
+
+INÍCIO_FUNÇÃO existeRegataComNumero(NUMÉRICO numero)
+    PARA ii <- 0 ATÉ ii < 3 [PASSO 1] INÍCIO
+        SE regatas[ii].numero = numero ENTÃO
+            retorne verdadeiro
+        FIM_SE
+    FIM_PARA
+
+    retorne falso
+FIM_FUNÇÃO
+
+INÍCIO_FUNÇÃO cadastrarRegatas()
+    Escreva "============| Cadastrar Regatas |============"
+
+    PARA ii <- 0 ATÉ ii < 3 [PASSO 1] INÍCIO
+        FAÇA
+            Escreva "Número da regata "
+            Leia numero
+
+            SE existeRegataComNumero(numero) ENTÃO
+                Escreva "-- Já existe uma regata com este número!"
+            FIM_SE
+        ENQUANTO existeRegataComNumero(numero)
+
+        regatas[ii].numero = numero
+
+        Escreva "Dia da regata: "
+        Leia dia
+
+        Escreva "Mês da regata: "
+        Leia mes
+
+        Escreva "Ano da regata: "
+        Leia ano
+
+        data <- dia, '/', mes, '/', ano
+        regatas[ii].data <- data
+
+        Escreva "Hora início: "
+        Leia regatas[ii].horaInicio
+
+        Escreva "____________________________________________________"
+    FIM_PARA
+FIM_FUNÇÃO
+
+INÍCIO_FUNÇÃO regataJaCadastradaEmEvento(NUMÉRICO numeroRegata)
+    PARA ii <- 0 ATÉ ii < 3 [PASSO 1] INÍCIO
+        SE participantes[ii][0].numeroRegata = numeroRegata ENTÃO
+            retorne verdadeiro
+        FIM_SE
+    FIM_PARA
+
+    retorne falso
+FIM_FUNÇÃO
+
+INÍCIO_FUNÇÃO barcoJaExisteNaRegata(NUMÉRICO numeroBarco, NUMÉRICO numeroRegata)
+    PARA ii <- 0 ATÉ ii < 3 [PASSO 1] INÍCIO
+        PARA jj <- 0 ATÉ jj < 4 [PASSO 1] INÍCIO
+            SE participantes[ii][jj].numeroBarco = numeroBarco E participantes[ii][jj].numeroRegata = numeroRegata ENTÃO
+                retorne verdadeiro
+            FIM_SE
+        FIM_PARA
+    FIM_PARA
+
+    retorne falso
+FIM_FUNÇÃO
+
+INÍCIO_FUNÇÃO definirVencedorRegata(NUMÉRICO numeroRegata, NUMÉRICO numeroBarco) 
+    PARA ii <- 0 ATÉ ii < 3 [PASSO 1] INÍCIO
+        SE regatas[ii].numero = numeroRegata
+            regatas[ii].codBarcoVencedor <- numeroBarco;
+        FIM_SE
+    FIM_PARA
+FIM_FUNÇÃO
+
+INÍCIO_FUNÇÃO cadastraEvento()
+    Escreva "============| Cadastrar Evento |============"
+    PARA ii <- 0 ATÉ ii < 3 [PASSO 1] INÍCIO
+        FAÇA
+            Escreva "Número da regata: "
+            Leia numeroRegata
+
+            SE NÃO existeRegataComNumero(numeroRegata) ENTÃO
+                Escreva "-- Não existe regata com este número!"
+            SENAO SE regataJaCadastradaEmEvento(numeroRegata) ENTÃO
+                Escreva "-- Regata já cadastrada em evento!"
+            FIM_SE
+        ENQUANTO NÃO existeRegataComNumero(numeroRegata) OU regataJaCadastradaEmEvento(numeroRegata)
+
+        menorTempo <- 25;
+
+        PARA jj <- 0 ATÉ jj < 4 [PASSO 1] INÍCIO
+            participantes[ii][jj].numeroRegata = numeroRegata;
+
+            FAÇA
+                Escreva "Número do ", (jj + 1), "° barco: "
+                Leia numeroBarco
+
+                SE NÃO existeBarcoComNumero(numeroBarco) ENTÃO
+                    Escreva "-- Não existe barco com este número!"
+                SENÃO SE barcoJaExisteNaRegata(numeroBarco, numeroRegata)
+                    Escreva "-- Barco já existe na regata!"
+            ENQUANTO NÃO existeBarcoComNumero(numeroBarco) OU barcoJaExisteNaRegata(numeroBarco, numeroRegata)
+
+            participantes[ii][jj].numeroBarco <- numeroBarco
+
+            Escreva "Hora de chegada do barco: "
+            Leia participantes[ii][jj].horaChegada
+
+            SE participantes[ii][jj].horaChegada < menorTempo ENTÃO
+                menorTempo <- participantes[ii][jj].horaChegada;
+                codBarcoMenorTempo <- numeroBarco;
+            FIM_SE
+        FIM_PARA
+
+        definirVencedorRegata(numeroRegata, codBarcoMenorTempo)
+
+        Escreva "____________________________________________________"
+    FIM_PARA
+FIM_FUNÇÃO
+
+INÍCIO_FUNÇÃO nomeBarco(NUMÉRICO numeroBarco)
+    PARA ii <- 0 ATÉ ii < 6 [PASSO 1] ENTÃO
+        SE barcos[ii].numero = numeroBarco ENTÃO
+            Escreva barcos[ii].nome
+            retorne
+        FIM_SE
+    FIM_PARA
+FIM_FUNÇÃO
+
+INÍCIO_FUNÇÃO anoFabricacaoBarco(NUMÉRICO numeroBarco)
+    PARA ii <- 0 ATÉ ii < 6 [PASSO 1] ENTÃO
+        SE barcos[ii].numero = numeroBarco ENTÃO
+            retorne barcos[ii].anoFabricacao
+        FIM_SE
+    FIM_PARA
+FIM_FUNÇÃO
+
+INÍCIO_FUNÇÃO mostrarRelacaoRegatas()
+    Escreva "============| Relação Regatas |============"
+    PARA ii <- 0 ATÉ ii < 3 [PASSO 1] ENTÃO
+        Escreva "Regata número: ", regatas[ii].numero
+        Escreva "Nome do barco vencedor: "
+        nomeBarco(regatas[ii].codBarcoVencedor)
+
+        Escreva "____________________________________________________"
+    FIM_PARA
+FIM_FUNÇÃO
+
+INÍCIO_FUNÇÃO tempoBarco(NUMÉRICO numeroBarco, NUMÉRICO numeroRegata)
+    PARA ii <- 0 ATÉ ii < 3 [PASSO 1] ENTÃO
+        SE regatas[ii].numero = numeroRegata ENTÃO
+            inicio <- regatas[ii].horaInicio
+        FIM_SE
+
+        PARA jj <- 0 ATÉ jj < 4 [PASSO 1] ENTÃO
+            SE participantes[ii][jj].numeroBarco = numeroBarco E participantes[ii][jj].numeroRegata = numeroRegata
+                chegada <- participantes[ii][jj].horaChegada
+            FIM_SE
+        FIM_PARA
+    FIM_PARA
+
+    SE chegada - inicio < 0 ENTÃO
+        retorne chegada + (24 - inicio)
+    SENÃO
+        retorne chegada - inicio
+    FIM_SE
+FIM_FUNÇÃO
+
+INÍCIO_FUNÇÃO mostrarRelacaoBarcosDeRegata(NUMÉRICO numeroRegata)
+    SE (!existeRegataComNumero(numeroRegata)) ENTÃO
+        Escreva "-- Não existe regata com este número!"
+        retorne
+    FIM_SE
+
+    Escreva "============| Relação Barcos Da Regata Número ", numeroRegata, " |============"
+    PARA ii <- 0 ATÉ ii < 3 [PASSO 1] ENTÃO
+        SE participantes[ii][0].numeroRegata = numeroRegata ENTÃO
+            PARA jj <- 0 ATÉ jj < 4 [PASSO 1] ENTÃO
+                Escreva "Número do barco: ", participantes[ii][jj].numeroBarco
+                Escreva "Nome do barco: "
+                nomeBarco(participantes[ii][jj].numeroBarco)
+                Escreva "Ano de fabricação do barco: ", anoFabricacaoBarco(participantes[ii][jj].numeroBarco)
+                Escreva "Tempo: ", tempoBarco(participantes[ii][jj].numeroBarco, numeroRegata),"h"
+                Escreva "____________________________________________________"
+            FIM_PARA
+            retorne
+        FIM_SE
+    FIM_PARA
+FIM_FUNÇÃO
+
+INÍCIO
+    cadastrarBarcos()
+    cadastrarRegatas()
+
+    cadastraEvento()
+
+    mostrarRelacaoRegatas()
+
+    Escreva "Gostaria de acessar a relação de barcos de qual regata? Informe o número da regata. "
+    Leia numRegata
+    mostrarRelacaoBarcosDeRegata(numRegata)
+FIM

@@ -1,0 +1,51 @@
+Algoritmo Cap7Ex7
+
+DECLARE
+    matriz[5][7], menor_l = 0, maior_c = 0, linha = 0, coluna = 0, tempLinha = 0 NUMÉRICO
+INÍCIO
+    PARA ii <- 0 ATÉ ii < 5 [PASSO 1] ENTÃO
+        PARA jj <- 0 ATÉ jj < 7 [PASSO 1] ENTÃO
+            matriz[ii][jj] <- (rand() % 89) + 10
+        FIM_PARA
+    FIM_PARA
+
+    Escreva "   1° 2° 3° 4° 5° 6° 7°"
+    PARA ii <- 0 ATÉ ii < 5 [PASSO 1] ENTÃO
+        Escreva "%d° ", (ii+1)
+        PARA jj <- 0 ATÉ jj < 7 [PASSO 1] ENTÃO
+            Escreva matriz[ii][jj]
+        FIM_PARA
+    FIM_PARA
+
+    PARA ii <- 0 ATÉ ii < 5 [PASSO 1] ENTÃO
+        Escreva "----------------------------------------------"
+        
+        menor_l <- matriz[ii][0]
+        linha <- ii
+        coluna <- 0
+
+        PARA jj <- 0 ATÉ jj < 7 [PASSO 1] ENTÃO
+            SE matriz[ii][jj] < menor_l ENTÃO
+                menor_l <- matriz[ii][jj]
+                linha <- ii
+                coluna <- jj
+            FIM_SE
+        FIM_PARA
+        Escreva "Menor elemento da ", (ii+1), "° linha é ", matriz[linha][coluna], ", fica na ", (coluna+1), "° coluna"
+
+        maior_c <- matriz[0][coluna]
+        tempLinha <- 0
+
+        PARA ll <- 0 ATÉ ll < 5 [PASSO 1] ENTÃO
+            SE matriz[ll][coluna] > maior_c ENTÃO
+                maior_c <- matriz[ll][coluna]
+                tempLinha <- ll
+            FIM_SE
+        FIM_PARA
+        Escreva "Maior elemento da ", (coluna+1), "° coluna é ", maior_c, ", fica na ", (tempLinha+1), "° linha"
+
+        SE matriz[linha][coluna] = matriz[tempLinha][coluna] ENTÃO
+            Escreva "Ponto de sela em: [", linha, "][", coluna,"] = ", matriz[linha][coluna]
+        FIM_SE
+    FIM_PARA
+FIM
