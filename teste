@@ -1,18 +1,21 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <unistd.h>  // Para a função sleep
 
-int main()
-{
+int main() {
     srand(time(NULL));
     
+    const char *emojis[5] = {"🐜", "🍏", "🍎", "🌟", "🚀"};
     
-    
-    for(int ii = 0; ii < 4; ii++){
+    // Impressão da estrutura inicial
+    for (int ii = 0; ii < 3; ii++) {
         printf("|       |  ");
     }
     
     printf("\n");
     
-    for(int ii = 0; ii < 4; ii++){
+    for (int ii = 0; ii < 3; ii++) {
         printf("---------  ");
     }
     
@@ -20,24 +23,31 @@ int main()
     
     printf("\x1b[32m\n");
     
-    for(int ii = 0; ii < 4; ii++){
+    for (int ii = 0; ii < 3; ii++) {
         printf("---------  ");
     }
     
     printf("\n");
     
-    for(int jj = 0; jj < 3; jj++){
-        for(int ii = 0; ii < 4; ii++){
-            if(jj == 1){
-                printf("|   %c   |  ", ((rand() % 26)+65));
-            }else{
+    // Loop para imprimir emojis com delay
+    for (int jj = 0; jj < 3; jj++) {
+        for (int ii = 0; ii < 3; ii++) {
+            if (jj == 1) {
+                printf("|   ");    
+                fflush(stdout);  // Força a saída imediatamente
+                sleep(2);  
+                printf("%s", emojis[rand() % 5]); // Parte 2
+                printf("   |  ");  
+                      // Delay de 1 segundo
+            } else {
                 printf("|       |  ");
             }
         }
         printf("\n");
     }
     
-    for(int ii = 0; ii < 4; ii++){
+    // Impressão da estrutura final
+    for (int ii = 0; ii < 3; ii++) {
         printf("---------  ");
     }
     
@@ -45,13 +55,13 @@ int main()
     
     printf("\e[0;37m\n");
     
-    for(int ii = 0; ii < 4; ii++){
+    for (int ii = 0; ii < 3; ii++) {
         printf("---------  ");
     }
     
     printf("\n");
     
-    for(int ii = 0; ii < 4; ii++){
+    for (int ii = 0; ii < 3; ii++) {
         printf("|       |  ");
     }
     
